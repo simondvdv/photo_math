@@ -5,12 +5,21 @@ def string_splitter(math_string):
 def number_checker(math_string, index):
     left_index = 0
     right_index = 0
-    for i in range(index):
-        if not (0 <= ord(math_string[index - i]) <= 9):
+    i = 0
+    while True:
+        i += 1
+        if not math_string[index - i].isdigit() or index - i == 0:
             left_index = i
-    for i in range(index):
-        if not (0 <= ord(math_string[index + i]) <= 9):
-            right_index = i
+            break
+    i = 0
+    while True:
+        i += 1
+        try:
+            if not math_string[index + i].isdigit():
+                right_index = i
+                break
+        except IndexError:
+            return left_index, len(math_string) - 1
     return left_index, right_index
 
 
@@ -32,4 +41,4 @@ def math_string_calculator(math_string):
     if '-' in math_string:
         index = math_string.find('-')
         pass
-    print(math_string)
+
